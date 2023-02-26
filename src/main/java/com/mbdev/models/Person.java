@@ -1,16 +1,16 @@
 package com.mbdev.models;
 
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 public class Person {
     private int id;
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     private String name;
+
+    @Pattern(regexp= "[A-Z][a-z]*, [A-Z][a-z]*, \\d{6}", message = "Your address should be in this format: Country, City, PostalCode(6digits)")
+    private String address;
 
     @Min(value = 0, message = "Age should be greater than 0")
     private int age;
@@ -23,11 +23,12 @@ public class Person {
 
     }
 
-    public Person(int id, String name, int age, String email) {
+    public Person(int id, String name, int age, String email, String addres) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.email = email;
+        this.address = addres;
     }
 
     public int getId() {
@@ -60,5 +61,13 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
